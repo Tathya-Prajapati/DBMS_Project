@@ -1,0 +1,459 @@
+SET SEARCH_PATH TO hms;
+
+--  --  --  --  --  --  --  --  1
+
+INSERT INTO logged_user VALUES
+(101,'tathyaprajapati123@gmail.com'),
+(102,'neha.gupta@outlook.com'),
+(103,'nithinkumar3737@hotmail.com'),
+(104,'badalprasad4505@outlook.com'),
+(105,'priya_sharma@gmail.com'),
+(106,'vikramverma@rediffmail.com'),
+(107,'adityajoshi@aol.com'),
+(108,'anjali_singh@yahoo.com'),
+(109,'kavyaxshah@icloud.com'),
+(110,'rohan_kumar@gmail.com');
+
+--  --  --  --  --  --  --  --  2
+
+INSERT INTO hospital VALUES
+('GUJ27R101','SHALBY MULTI SPECIALITY HOSPITAL','AHMEDABAD','382330'),
+('MAH01R100','APOLLO HOSPITALS','MUMBAI','380008'),
+('DEL11G103','MAX SUPER SPECIALITY HOSPITAL','NEW DELHI','151101'),
+('RAJ77R104','MANIPAL MULTI SPECIALTY HOSPITAL','JAIPUR','391181'),
+('GUJ32R105','NARAYANA HRUDAYALAY CENTER','SURAT','233721'),
+('MAH98R106','MEDANTA - THE MEDICITY','MUMBAI','359320'),
+('GUJ21R107','KOKILABEN DHIRUBHAI AMBANI HOSPITAL','AHMEDABAD','377580'),
+('RAJ37R108','LILAVATI HOSPITAL AND RESEARCH CENTER','JAIPUR','493553'),
+('DEL45R109','SRI GANGA RAM HOSPITAL','NEW DELHI','812219'),
+('DEL45R109','KARNAVATI JIVARAM HOSPITAL','AHMEDABAD','432145');
+
+--  --  --  --  --  --  --  --  3
+
+INSERT INTO Staff VALUES
+('GUJ27R101',991101,'SWAPNEEL','LABASSIST'),
+('GUJ27R101',991102,'PRIYA PATIL','NURSE'),
+('GUJ27R101',991103,'GUNJAN S','UTILITY ENG'),
+('MAH01R100',991104,'MANAV SHAH','PHARMACIST'),
+('MAH01R100',991105,'KATHIKEY','LABASSIST'),
+('MAH01R100',991106,'JHANVI CHWAHAN','NURSE'),
+('DEL11G103',991107,'VISHA','NURSE'),
+('DEL11G103',991108,'NITHEEN','PHARMACIST'),
+('DEL11G103',991109,'JYOTHI','OPERATION HEAD'),
+('RAJ77R104',991110,'MAHI KAMBAD','NURSE'),
+('RAJ77R104',991111,'ANJALI','NURSE'),
+('RAJ77R104',991112,'VIPASHA','RADIOLOGIST'),
+('GUJ32R105',991113,'SUNEEL','TECHNICIAN'),
+('GUJ32R105',991114,'VIPUL','PHARMACIST'),
+('GUJ32R105',991115,'ANKITA TALPADE','NURSE'),
+('MAH98R106',991116,'SHREYA','NURSE'),
+('MAH98R106',991117,'SHREY','OPERATION HEAD'),
+('MAH98R106',991118,'AKSHITA','PHARMACIST'),
+('GUJ21R107',991119,'VAISHALI','NURSE'),
+('GUJ21R107',991120,'SIDDHARTH','THERAPIST'),
+('GUJ21R107',991121,'VINOD','LABASSIST'),
+('RAJ37R108',991122,'SANJAY','DIETITIAN'),
+('RAJ37R108',991123,'GUMAAN','LABASSIST'),
+('RAJ37R108',991124,'DEEPIKA','NURSE'),
+('DEL45R109',991125,'RESHMA','NURSE'),
+('DEL45R109',991126,'AKAASH','PHARMACIST'),
+('GUJ67R110',991127,'AMAN','LABASSIST'),
+('GUJ67R110',991128,'RUPALI','NURSE');
+
+--  --  --  --  --  --  --  --  4
+
+INSERT INTO Hospital_Contact_No VALUES
+('GUJ27R101','9100129121'),
+('MAH01R100','7721213342'),
+('DEL11G103','7612390129'),
+('RAJ77R104','9981261255'),
+('GUJ32R105','9999881211'),
+('MAH98R106','6721998237'),
+('GUJ21R107','7192344621'),
+('RAJ37R108','8812121212'),
+('DEL45R109','8721929321'),
+('GUJ67R110','8293871291'),
+('GUJ27R101','8934612578'),
+('MAH01R100','6489230175'),
+('DEL11G103','7834591026'),
+('RAJ77R104','9610273548'),
+('GUJ32R105','8753492160'),
+('MAH98R106','8325719406'),
+('GUJ21R107','9182630574'),
+('RAJ37R108','7319820564'),
+('DEL45R109','9264138750'),
+('GUJ67R110','8150364972'),
+('GUJ27R101','6375932084'),
+('MAH01R100','9725836140'),
+('DEL11G103','8945273610'),
+('RAJ77R104','8290471653'),
+('GUJ32R105','8217392181'),
+('MAH98R106','9234612233'),
+('GUJ21R107','7283612331'),
+('RAJ37R108','9273623817'),
+('DEL45R109','7458724844'),
+('GUJ67R110','8736325823');
+
+--  --  --  --  --  --  --  --  5
+
+INSERT INTO Department VALUES
+('Cardiology'),
+('Pediatrics'),
+('Orthopedics'),
+('Obstetrics and Gynecology'),
+('Oncology'),
+('Neurology'),
+('Psychiatry'),
+('Physiotherapy'),
+('Dermatology'),
+('Gastroenterology'),
+('Endocrinology'),
+('Medicine');
+
+--  --  --  --  --  --  --  --  6
+
+INSERT INTO Dept_Details VALUES
+('GUJ27R101','Orthopedics','555'),
+('GUJ27R101','Physiotherapy','456'),
+('GUJ27R101','Medicine','665'),
+('GUJ27R101','Obstetrics and Gynecology','452'),
+('MAH01R100','Obstetrics and Gynecology','556'),
+('DEL11G103','Medicine','545'),
+('DEL11G103','Orthopedics','882'),
+('DEL11G103','Endocrinology','666'),
+('RAJ77R104','Oncology','672'),
+('RAJ77R104','Medicine','112'),
+('RAJ77R104','Cardiology','726'),
+('GUJ32R105','Gastroenterology','355'),
+('GUJ32R105','Orthopedics','553'),
+('MAH98R106','Endocrinology','133'),
+('MAH98R106','Dermatology','432'),
+('MAH98R106','Medicine','932'),
+('MAH98R106','Neurology','999'),
+('GUJ21R107','Oncology','111'),
+('GUJ21R107','Obstetrics and Gynecology','101'),
+('GUJ21R107','Pediatrics','200'),
+('RAJ37R108','Medicine','303'),
+('RAJ37R108','Neurology','192'),
+('DEL45R109','Medicine','213'),
+('DEL45R109','Gastroenterology','843'),
+('DEL45R109','Orthopedics','348');
+
+--  --  --  --  --  --  --  --  7
+
+INSERT INTO Hospital_Capacity VALUES
+('GUJ27R101','Orthopedics','General',10),
+('GUJ27R101','Medicine','General',100),
+('GUJ27R101','Medicine','ICU',30),
+('GUJ27R101','Medicine','Special',25),
+('GUJ27R101','Obstetrics and Gynecology','General',50),
+('GUJ27R101','Obstetrics and Gynecology','Deluxe',20),
+('GUJ27R101','Obstetrics and Gynecology','Semi-Deluxe',25),
+('MAH01R100','Obstetrics and Gynecology','General',65),
+('MAH01R100','Obstetrics and Gynecology','Semi-Deluxe',25),
+('MAH01R100','Obstetrics and Gynecology','Deluxe',20),
+('DEL11G103','Medicine','General',105),
+('DEL11G103','Medicine','ICU',50),
+('DEL11G103','Medicine','Special',15),
+('DEL11G103','Orthopedics','General',15),
+('DEL11G103','Endocrinology','General',5),
+('RAJ77R104','Oncology','General',17),
+('RAJ77R104','Medicine','General',100),
+('RAJ77R104','Medicine','ICU',30),
+('RAJ77R104','Medicine','Special',25),
+('RAJ77R104','Cardiology','General',19),
+('GUJ32R105','Gastroenterology','General',7),
+('GUJ32R105','Orthopedics','General',10),
+('MAH98R106','Endocrinology','Special',3),
+('MAH98R106','Dermatology','ICU',6),
+('MAH98R106','Dermatology','General',10),
+('MAH98R106','Medicine','General',100),
+('MAH98R106','Medicine','ICU',30),
+('MAH98R106','Medicine','Special',25),
+('MAH98R106','Neurology','Special',10),
+('GUJ21R107','Obstetrics and Gynecology','General',50),
+('GUJ21R107','Obstetrics and Gynecology','Deluxe',20),
+('GUJ21R107','Obstetrics and Gynecology','Semi-Deluxe',25),
+('GUJ21R107','Pediatrics','General',50),
+('GUJ21R107','Pediatrics','ICU',20),
+('GUJ21R107','Pediatrics','Special',15),
+('GUJ21R107','Pediatrics','Deluce',8),
+('RAJ37R108','Medicine','General',100),
+('RAJ37R108','Medicine','ICU',30),
+('RAJ37R108','Medicine','Special',25),
+('RAJ37R108','Neurology','Special',10),
+('DEL45R109','Medicine','General',100),
+('DEL45R109','Medicine','ICU',30),
+('DEL45R109','Medicine','Special',25),
+('DEL45R109','Orthopedics','General',10);
+
+--  --  --  --  --  --  --  --  8
+
+INSERT INTO Doctor VALUES
+(120001,'pratibha.param212@shalby.ac.in','9212932112','PRATIBHA','PARAM','Orthopedist'),
+(120002,'shekhar_suhaas82@gmail.com','8321398201','SHEKHAR','SUHAS','Physician'),
+(120003,'pankuri.paathak721@yahoo.com','6238217831','PANKURI','PAATHAK','Gynecologist'),
+(120004,'nilesh.patel832@gmail.com','6348242723','NILESH','PATEL','Gynecologist'),
+(120005,'atiq.ansari219@gmail.com','7345361271','ATIQ','ANSARI','Orthopedist'),
+(120006,'kamal_jat@gmail.com','9456273831','KAMAL','JAT','Physician'),
+(120007,'hema.raulji@yahoo.com','7721823165','HEMA','RAULJI','Endocrinologist'),
+(120008,'jigar_rakesh.sharma@gmail.com','7326219261','JIGAR','SHARMA','Physician'),
+(120009,'tathya.patel@outlook.com','7632932623','TATHYA','PATEL','Cardiologist'),
+(120010,'neethin.kanu@gmail.com','7236428643','NEETHIN','KANU','Oncologist'),
+(120011,'mukund.santhal@gmail.com','9532623421','MUKUND','SANTHAL','Gastroenterologist'),
+(120012,'rakesh.patel@gmail.com','7123861212','RAKESH','PATEL','Orthopedist'),
+(120013,'kalpana_pandey@yahoo.com','7721823111','KALPANA','PANDEY','Endocrinologist'),
+(120014,'kirit_pandya','7721876212','KIRIT','PANDYA','Dermatologist'),
+(120015,'shikhar_suhaas82@gmail.com','8321392311','SHIKHAR','SUHAS','Physician'),
+(120016,'kiara212@gmail.com','7237128210','KIARA','RAMANI','Neurologist'),
+(120017,'urmila.chaturvedi8868@yahoo.com','6248217831','URMILA','CHATURVEDI','Gynecologist'),
+(120018,'divya.prakash652@gmail.com','9921312482','DIVYA','PRAKASH','Neurologist'),
+(120019,'jaimin.yagnik@gmail.com','8465721321','JAIMIN','YAGNIK','Physician'),
+(120020,'shraddha.gulati@gmail.com','8342828812','SHRADDHA','GULATI','Pediatrician'),
+(120021,'bharat.tata@gmail.com','7324928331','BHARAT','TATA','Physician'),
+(120022,'pari.vedivel','7347843021','PARI','VEDIVEL','Orthopedist');
+
+--  --  --  --  --  --  --  --  9
+
+INSERT INTO H_D_Doctor VALUES
+('GUJ27R101','Orthopedics',120001),
+('GUJ27R101','Medicine',120002),
+('GUJ27R101','Obstetrics and Gynecology',120003),
+('MAH01R100','Obstetrics and Gynecology',120004),
+('DEL11G103','Medicine',120006),
+('DEL11G103','Orthopedics',120005),
+('DEL11G103','Endocrinology',120007),
+('RAJ77R104','Medicine',120008),
+('RAJ77R104','Cardiology',120009),
+('RAJ77R104','Oncology',120010),
+('GUJ32R105','Gastroenterology',120011),
+('GUJ32R105','Orthopedics',120012),
+('MAH98R106','Endocrinology',120013),
+('MAH98R106','Medicine',120015),
+('MAH98R106','Dermatology',120014),
+('MAH98R106','Neurology',120016),
+('GUJ21R107','Obstetrics and Gynecology',120017),
+('GUJ21R107','Pediatrics',120020),
+('RAJ37R108','Medicine',120019),
+('RAJ37R108','Neurology',120018),
+('DEL45R109','Medicine',120021),
+('DEL45R109','Orthopedics',120022);
+
+--  --  --  --  --  --  --  --  10
+
+INSERT INTO Doc_Visiting_Details VALUES
+('GUJ27R101','Orthopedics',120001,'FRIDAY'),
+('GUJ27R101','Orthopedics',120001,'WEDNESDAY'),
+('GUJ27R101','Medicine',120002,'EVERYDAY'),
+('GUJ27R101','Obstetrics and Gynecology',120003,'EVERYDAY'),
+('MAH01R100','Obstetrics and Gynecology',120004,'EVERYDAY'),
+('DEL11G103','Medicine',120006,'EVERYDAY'),
+('DEL11G103','Orthopedics',120005,'MONDAY'),
+('DEL11G103','Orthopedics',120005,'THURSDAY'),
+('DEL11G103','Endocrinology',120007,'FRIDAY'),
+('RAJ77R104','Medicine',120008,'EVERYDAY'),
+('RAJ77R104','Cardiology',120009,'MONDAY'),
+('RAJ77R104','Cardiology',120009,'WEDNESDAY'),
+('RAJ77R104','Cardiology',120009,'FRIDAY'),
+('RAJ77R104','Oncology',120010,'THURSDAY'),
+('GUJ32R105','Gastroenterology',120011,'TUESDAY'),
+('GUJ32R105','Orthopedics',120012,'MONDAY'),
+('GUJ32R105','Orthopedics',120012,'WEDNESDAY'),
+('MAH98R106','Endocrinology',120013,'SATURDAY'),
+('MAH98R106','Medicine',120015,'EVERYDAY'),
+('MAH98R106','Dermatology',120014,'MONDAY'),
+('MAH98R106','Dermatology',120014,'SATURDAY'),
+('MAH98R106','Neurology',120016,'THURSDAY'),
+('MAH98R106','Neurology',120016,'FRIDAY'),
+('GUJ21R107','Obstetrics and Gynecology',120017,'EVERYDAY'),
+('GUJ21R107','Pediatrics',120020,'EVERYDAY'),
+('RAJ37R108','Medicine',120019,'EVERYDAY'),
+('RAJ37R108','Neurology',120018,'EVERYDAY'),
+('DEL45R109','Medicine',120021,'EVERYDAY'),
+('DEL45R109','Orthopedics',120022,'TUESDAY'),
+('DEL45R109','Orthopedics',120022,'THURSDAY'),
+('DEL45R109','Orthopedics',120022,'SATURDAY');
+
+--  --  --  --  --  --  --  --  11
+
+INSERT INTO Appointment VALUES
+(101,'GUJ27R101','Medicine',120002,'2023-11-05','12:30:00','WEDNESDAY'),
+(102,'MAH01R100','Obstetrics and Gynecology',120004,'2023-10-23','13:00:00','THURSDAY'),
+(103,'RAJ77R104','Cardiology',120009,'2023-12-10','16:30:00','MONDAY'),
+(104,'DEL45R109','Medicine',120021,'2023-09-28','18:15:00','FRIDAY'),
+(105,'GUJ21R107','Pediatrics',120020,'2023-10-31','10:30:00','SATURDAY'),
+(106,'MAH98R106','Endocrinology',120013,'2023-11-18','12:05:00','SATURDAY'),
+(107,'GUJ27R101','Orthopedics',120001,'2023-12-19','13:20:00','FRIDAY'),
+(108,'MAH01R100','Obstetrics and Gynecology',120004,'2023-09-19','15:00:00','SUNDAY'),
+(109,'MAH98R106','Neurology',120016,'2023-12-08','12:45:00','THURSDAY');
+
+--  --  --  --  --  --  --  --  12
+
+INSERT INTO Patient VALUES 
+(1011, 120001, 'GUJ27R101', 'Orthopedics', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1989-03-12'::date), 'A+', '1989-03-12', 75.5, 180.0, 'Rahul', 'Verma', 'General', '101'),
+(1012, 120002, 'GUJ27R101', 'Medicine', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1994-08-21'::date), 'B-', '1994-08-21', 65.2, 162.5, 'Priya', 'Sharma', 'ICU', '102'),
+(1013, 120019, 'RAJ37R108', 'Medicine', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1980-10-05'::date), 'O+', '1980-10-05', 60.0, 155.0, 'Anjali', 'Singh', 'Semi-Deluxe', '103'),
+(1014, 120004, 'MAH01R100', 'Obstetrics and Gynecology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1992-05-18'::date), 'AB-', '1992-05-18', 68.7, 167.0, 'Neha', 'Joshi', 'Deluxe', '102'),
+(1015, 120005, 'DEL11G103', 'Orthopedics', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1978-11-30'::date), 'O-', '1978-11-30', 80.3, 175.5, 'Raj', 'Kumar', 'General', '103'),
+(1016, 120006, 'DEL11G103', 'Medicine', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1986-07-25'::date), 'A-', '1986-07-25', 73.8, 182.0, 'Amit', 'Singh', 'ICU', '105'),
+(1017, 120007, 'DEL11G103', 'Endocrinology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1972-12-15'::date), 'O+', '1972-12-15', 65.0, 160.0, 'Pooja', 'Gupta', 'General', '104'),
+(1018, 120008, 'RAJ77R104', 'Medicine', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1993-09-28'::date), 'B+', '1993-09-28', 70.5, 175.0, 'Rajesh', 'Yadav', 'Semi-Deluxe', '108'),
+(1019, 120009, 'RAJ77R104', 'Cardiology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1964-06-20'::date), 'AB-', '1964-06-20', 55.0, 160.0, 'Sunita', 'Choudhary', 'General', '105'),
+(1010, 120010, 'RAJ77R104', 'Oncology', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1969-04-02'::date), 'A+', '1969-04-02', 85.2, 178.5, 'Amar', 'Mishra', 'General', '110'), 
+(1001, 120001, 'GUJ27R101', 'Orthopedics', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1989-03-12'::date), 'A+', '1989-03-12', 75.5, 180.0, 'Ravi', 'Patel', 'General', '101'),
+(1002, 120012, 'GUJ32R105','Orthopedics', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1994-08-21'::date), 'B-', '1994-08-21', 65.2, 162.5, 'Priya', 'Sharma', 'General', '102'),
+(1003, 120003, 'GUJ27R101', 'Obstetrics and Gynecology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1980-10-05'::date), 'O+', '1980-10-05', 60.0, 155.0, 'Sneha', 'Desai', 'Semi-Deluxe', '103'),
+(1004, 120004, 'MAH01R100', 'Obstetrics and Gynecology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1992-05-18'::date), 'AB-', '1992-05-18', 68.7, 167.0, 'Neha', 'Joshi', 'General', '104'),
+(1005, 120019, 'RAJ37R108', 'Medicine', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1986-07-25'::date), 'A-', '1986-07-25', 73.8, 182.0, 'Amit', 'Kumar', 'ICU', '105'),
+(1006, 120022, 'DEL45R109', 'Orthopedics', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1978-11-30'::date), 'O-', '1978-11-30', 80.3, 175.5, 'Vikram', 'Singh', 'General', '106'),
+(1007, 120013, 'MAH98R106', 'Endocrinology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1972-12-15'::date), 'O+', '1972-12-15', 65.0, 160.0, 'Anjali', 'Gupta', 'General', '107'),
+(1008, 120021, 'DEL45R109', 'Medicine', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1993-09-28'::date), 'B+', '1993-09-28', 70.5, 175.0, 'Rajesh', 'Yadav', 'Semi-Deluxe', '108'),
+(1009, 120009, 'RAJ77R104', 'Cardiology', 'Female', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1964-06-20'::date), 'AB-', '1964-06-20', 55.0, 160.0, 'Sunita', 'Choudhary', 'General', '109'),
+(1031, 120010, 'RAJ77R104', 'Oncology', 'Male', EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM '1969-04-02'::date), 'A+', '1969-04-02', 85.2, 178.5, 'Amar', 'Mishra', 'General', '110');
+
+--  --  --  --  --  --  --  --  13
+
+INSERT INTO Patient_Contact_Details VALUES
+(1011, '9234567890'),
+(1011, '9876543210'),
+(1012, '2345678901'),
+(1012, '8765432109'),
+(1013, '3456789012'),
+(1013, '7654321098'),
+(1014, '4567890123'),
+(1014, '6543210987'),
+(1015, '5678901234'),
+(1015, '5432109876'),
+(1016, '6789012345'),
+(1016, '4321098765'),
+(1017, '7890123456'),
+(1017, '3210987654'),
+(1018, '8901234567'),
+(1018, '2109876543'),
+(1019, '9012345678'),
+(1019, '1098765432'),
+(1010, '0123456789'),
+(1010, '0987654321'),
+(1001, '2345678901'),
+(1001, '9876543210'),
+(1002, '4567890123'),
+(1002, '8765432109'),
+(1003, '5678901234'),
+(1003, '7654321098'),
+(1004, '6789012345'),
+(1004, '6543210987'),
+(1005, '7890123456'),
+(1005, '5432109876'),
+(1006, '8901234567'),
+(1006, '4321098765'),
+(1007, '9012345678'),
+(1007, '3210987654'),
+(1008, '0123456789'),
+(1008, '2109876543'),
+(1009, '1234567890'),
+(1009, '1098765432'),
+(1031, '2345678901'),
+(1031, '0987654321');
+
+--  --  --  --  --  --  --  --  14
+
+INSERT INTO Checks VALUES
+(1011, 'GUJ27R101', 'Orthopedics', 120001),
+(1012, 'GUJ27R101', 'Medicine', 120002),
+(1013, 'RAJ37R108', 'Medicine', 120019),
+(1014, 'MAH01R100', 'Obstetrics and Gynecology', 120004),
+(1015, 'DEL11G103', 'Orthopedics', 120005),
+(1016, 'DEL11G103', 'Medicine', 120006),
+(1017, 'DEL11G103', 'Endocrinology', 120007),
+(1018, 'RAJ77R104', 'Medicine', 120008),
+(1019, 'RAJ77R104', 'Cardiology', 120009),
+(1010, 'RAJ77R104', 'Oncology', 120010), 
+(1001, 'GUJ27R101', 'Orthopedics', 120001),
+(1002, 'GUJ32R105', 'Orthopedics', 120012),
+(1003, 'GUJ27R101', 'Obstetrics and Gynecology', 120003);
+
+--  --  --  --  --  --  --  --  15
+
+INSERT INTO Consult VALUES
+(1011, 'GUJ27R101', 'Orthopedics', 120001, '2023-10-15'),
+(1012, 'GUJ27R101', 'Medicine', 120002, '2023-11-20'),
+(1013, 'RAJ37R108', 'Medicine', 120019, '2023-10-30'),
+(1014, 'MAH01R100', 'Obstetrics and Gynecology', 120004, '2023-11-05'),
+(1015, 'DEL11G103', 'Orthopedics', 120005, '2023-12-01'),
+(1016, 'DEL11G103', 'Medicine', 120006, '2023-10-18'),
+(1017, 'DEL11G103', 'Endocrinology', 120007, '2023-11-25'),
+(1018, 'RAJ77R104', 'Medicine', 120008, '2023-12-10'),
+(1019, 'RAJ77R104', 'Cardiology', 120009, '2023-10-28'),
+(1010, 'RAJ77R104', 'Oncology', 120010, '2023-11-15'), 
+(1001, 'GUJ27R101', 'Orthopedics', 120001, '2023-12-05'),
+(1002, 'GUJ32R105', 'Orthopedics', 120012, '2023-10-20'),
+(1003, 'GUJ27R101', 'Obstetrics and Gynecology', 120003, '2023-12-30'),
+(1004, 'MAH01R100', 'Obstetrics and Gynecology', 120004, '2023-11-08'),
+(1005, 'RAJ37R108', 'Medicine', 120019, '2023-10-12'),
+(1006, 'DEL45R109', 'Orthopedics', 120022, '2023-12-18'),
+(1007, 'MAH98R106', 'Endocrinology', 120013, '2023-11-21'),
+(1008, 'DEL45R109', 'Medicine', 120021, '2023-10-07'),
+(1009, 'RAJ77R104', 'Cardiology', 120009, '2023-12-03'),
+(1031, 'RAJ77R104', 'Oncology', 120010, '2023-10-29');
+
+--  --  --  --  --  --  --  --  16
+
+INSERT INTO Check_report VALUES
+(1011, 'GUJ27R101', 'Orthopedics', 120001,'CBC'),
+(1012, 'GUJ27R101', 'Medicine', 120002,'CMP'),
+(1013, 'RAJ37R108', 'Medicine', 120019,'BMP'),
+(1014, 'MAH01R100', 'Obstetrics and Gynecology', 120004,'Blood Glucose Test'),
+(1015, 'DEL11G103', 'Orthopedics', 120005, 'Lipid Profile'),
+(1016, 'DEL11G103', 'Medicine', 120006, 'LFT'),
+(1017, 'DEL11G103', 'Endocrinology', 120007, 'Urinalysis'),
+(1018, 'RAJ77R104', 'Medicine', 120008, 'BMP'),
+(1019, 'RAJ77R104', 'Cardiology', 120009, 'CMP'),
+(1010, 'RAJ77R104', 'Oncology', 120010, 'WBC'), 
+(1001, 'GUJ27R101', 'Orthopedics', 120001, 'Urinalysis'),
+(1002, 'GUJ32R105', 'Orthopedics', 120012, 'BMP'),
+(1003, 'GUJ27R101', 'Obstetrics and Gynecology', 120003, 'CMP');
+
+--  --  --  --  --  --  --  --  17
+
+INSERT INTO Check_date VALUES
+(1011, 'GUJ27R101', 'Orthopedics', 120001,'2023-10-16'),
+(1012, 'GUJ27R101', 'Medicine', 120002,'2023-11-21'),
+(1013, 'RAJ37R108', 'Medicine', 120019,'2023-10-30'),
+(1014, 'MAH01R100', 'Obstetrics and Gynecology', 120004,'2023-11-05'),
+(1015, 'DEL11G103', 'Orthopedics', 120005,'2023-12-01'),
+(1016, 'DEL11G103', 'Medicine', 120006,'2023-10-18'),
+(1017, 'DEL11G103', 'Endocrinology', 120007,'2023-11-27'),
+(1018, 'RAJ77R104', 'Medicine', 120008,'2023-12-13'),
+(1019, 'RAJ77R104', 'Cardiology', 120009,'2023-10-29'),
+(1010, 'RAJ77R104', 'Oncology', 120010,'2023-11-15'), 
+(1001, 'GUJ27R101', 'Orthopedics', 120001,'2023-12-05'),
+(1002, 'GUJ32R105', 'Orthopedics', 120012,'2023-10-20'),
+(1003, 'GUJ27R101', 'Obstetrics and Gynecology', 120003,'2023-12-30');
+
+--  --  --  --  --  --  --  --  18
+
+INSERT INTO MedicalHistory VALUES
+('Hypertension', 1011, 'YES', NULL),
+('Diabetic-1', 1011, 'YES', 'YES'),
+('Asthma', 1012, 'YES', NULL),
+('Allergies', 1012, 'YES' NULL),
+('Arthritis', 1013, NULL, NULL),
+('COPD', 1014, 'YES', 'YES'),
+('WELL', 1015, NULL, NULL),
+('Anxiety', 1016, 'YES',NULL),
+('Gastroesophageal Reflux Disease (GERD)', 1017, NULL, NULL),
+('Lung Cancer', 1018, 'YES', 'YES'),
+('Hyperlipidemia', 1019, 'YES','YES'),
+('hypotension', 1010, 'YES', NULL), 
+('Stroke', 1001, 'YES',  NULL),
+('Coronary Artery Disease', 1002, NULL, NULL),
+('Asthma', 1002, NULL, NULL),
+('WELL', 1003, NULL, NULL),
+('WELL', 1004, NULL, NULL),
+('WELL', 1005, 'YES', NULL),
+('Allergies', 1006, NULL, NULL),
+('Diabetes-2', 1007, 'YES', 'YES'),
+('Hypothyroidism', 1007, NULL, NULL),
+('WELL', 1008, NULL, NULL),
+('Asthma', 1009, 'YES', 'YES'),
+('Hyperlipidemia', 1031, 'YES', NULL);

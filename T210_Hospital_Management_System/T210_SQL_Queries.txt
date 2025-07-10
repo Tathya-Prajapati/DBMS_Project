@@ -1,0 +1,285 @@
+SET SEARCH_PATH TO HMS;
+
+-- 1) List of all doctors working in a specific department of a hospital
+
+SELECT *
+FROM Doctor
+NATURAL JOIN H_D_Doctor
+WHERE RegNo = 'GUJ32R105' AND Dname = 'Orthopedics';
+
+-- 2) List of all userid which did not consult any doctor
+
+SELECT userid FROM Appointment
+EXCEPT
+(SELECT userid
+FROM Appointment 
+NATURAL JOIN H_D_Doctor 
+NATURAL JOIN Consult);
+
+-- 3) List of all no of appointment for all dates/month/year
+
+-- 3-i) Date wise
+SELECT 
+    "Date",
+    COUNT(*) AS num_appointments
+FROM 
+    Appointment
+GROUP BY 
+    "Date"
+ORDER BY 
+    "Date";
+
+-- 3-ii) month wise
+SELECT 
+    EXTRACT(YEAR FROM "Date") AS year,
+    EXTRACT(MONTH FROM "Date") AS month,
+    COUNT(*) AS num_appointments
+FROM 
+    Appointment
+GROUP BY 
+    EXTRACT(YEAR FROM "Date"),
+    EXTRACT(MONTH FROM "Date")
+ORDER BY 
+    year, month;
+
+-- 3-iii) Year wise
+SELECT 
+    EXTRACT(YEAR FROM "Date") AS year,
+    COUNT(*) AS num_appointments
+FROM 
+    Appointment
+GROUP BY 
+    EXTRACT(YEAR FROM "Date")
+ORDER BY 
+    year;
+
+-- 4) List of all Departments in particular city
+
+-- 4-i) all department
+SELECT DISTINCT Dept_Details.Dname,Hospital.Hname
+FROM Dept_Details
+JOIN Hospital ON Dept_Details.RegNo = Hospital.RegNo
+WHERE Hospital.City = 'JAIPUR';
+
+-- 4-ii) List of all Hname for particular department 
+SELECT Hospital.Hname
+FROM Dept_Details
+JOIN Hospital ON Dept_Details.RegNo = Hospital.RegNo
+WHERE Hospital.City = 'JAIPUR' AND  Dept_Details.Dname='Cardiology';
+
+-- 5) Number of Employees for all post of each Hospital
+
+SELECT RegNo,Hname,Post,no_of_staff
+FROM Hospital
+NATURAL JOIN 
+(SELECT RegNo,Post,COUNT(Empid) AS no_of_staff
+FROM Staff
+GROUP BY RegNo,Post) AS TB
+ORDER BY RegNo;
+
+-- 6) List Doctors (Docid) who do not visit the particular hospital more than once in a week
+
+SELECT docid
+FROM (
+    -- list of no of day in week all doctors are visit  
+    SELECT docid, Regno, COUNT(DISTINCT "Day") AS visit_days
+    FROM Doc_Visiting_Details
+    GROUP BY docid, Regno
+    HAVING RegNo='GUJ32R105'
+) AS doc_visits
+WHERE visit_days = 1;
+
+-- 6-i) List all the doctors available for the given day for each hospital and it's Department
+
+SELECT Hname,Dname,Docid,"Day"
+FROM Hospital
+NATURAL JOIN (SELECT RegNo,Dname,Docid,"Day" 
+FROM Doc_Visiting_Details
+GROUP BY RegNo, Dname, Docid, "Day") AS TT
+WHERE "Day"='MONDAY';
+
+-- 7) Retrieve the available capacity information for each department of the hospital
+
+SELECT Hospital.Hname,
+       Dept_Details.Dname,
+       Hospital_Capacity.Roomtype,
+       Hospital_Capacity.TotalCapacity,
+       COUNT(Bedno) AS Occupied_Capacity,
+       Hospital_Capacity.TotalCapacity - COUNT(Bedno) AS Available_Capacity
+FROM Hospital
+NATURAL JOIN Dept_Details
+NATURAL JOIN Hospital_Capacity 
+NATURAL JOIN H_D_Doctor
+NATURAL JOIN Patient
+GROUP BY Hospital.RegNo, Dept_Details.Dname, Hospital_Capacity.Roomtype, Hospital_Capacity.TotalCapacity;
+
+-- 8) Doctor with the maximum number of appointments for all departments
+
+SELECT Docid, Dname, Fname, Lname, MAX(No_Of_Appointments) 
+FROM
+(SELECT Dname,Docid,Fname,Lname,COUNT("Day") as No_Of_Appointments 
+FROM
+(SELECT * FROM Appointment
+NATURAL JOIN H_D_Doctor
+NATURAL JOIN Doctor) as maxappts
+GROUP BY Dname,Docid,Fname,Lname) as ByDeptApps
+GROUP BY Docid, Dname, Fname, Lname;
+
+-- 9) List patients with age 18 years or above.
+
+SELECT Pid, Fname, Lname, age
+FROM Patient 
+NATURAL JOIN checks 
+WHERE age>=18;
+
+-- 10) List Doctors with Particular Specialization
+
+SELECT Docid,Fname
+FROM Doctor
+WHERE Specialization='Orthopedist';
+
+-- 11) List patients for some condition with age below 18 years
+
+SELECT Pid,Fname,Lname
+FROM Patient 
+NATURAL JOIN MedicalHistory
+WHERE "Condition"='Lung Cancer' AND age<=18;
+
+-- 12) Number of times the Doctor has checked/consulted the patient
+
+SELECT Pid,RegNo,Hname,Dname,no_of_time_patient_check
+FROM Hospital
+NATURAL JOIN Dept_Details
+NATURAL JOIN H_D_Doctor
+NATURAL JOIN checks
+NATURAL JOIN 
+(SELECT Pid,RegNo,Dname,COUNT("Date") AS no_of_time_patient_check
+FROM check_Date
+GROUP BY Pid,RegNo,Dname) AS TB;
+
+-- 13) Find the most common Medical Condition among patients
+
+SELECT "Condition", COUNT(*) AS num_patients
+FROM MedicalHistory
+WHERE "Condition" <> 'WELL'
+GROUP BY "Condition"
+ORDER BY num_patients DESC
+LIMIT 1;
+
+-- 14) List the departments of hospitals where the average patient age is above 50
+
+SELECT Dept_Details.Dname, AVG(Patient.age) AS avg_age
+FROM Patient
+JOIN Dept_Details ON Patient.RegNo = Dept_Details.RegNo AND Patient.Dname = Dept_Details.Dname
+WHERE Dept_Details.RegNo = 'RAJ77R104'
+GROUP BY Dept_Details.Dname
+HAVING AVG(Patient.age) > 50;
+
+-- 15) List hospitals with a specific room type available and their total capacity
+
+SELECT Hospital.RegNo, Hospital.Hname, Hospital_capacity.Roomtype, SUM(Hospital_Capacity.TotalCapacity) AS total_capacity
+FROM Hospital
+JOIN  Hospital_Capacity ON Hospital.RegNo = Hospital_Capacity.RegNo
+WHERE Hospital_Capacity.Roomtype = 'ICU'
+GROUP BY Hospital.RegNo, Hospital.Hname, Hospital_Capacity.Roomtype;
+
+-- 16) Find the doctors who have appointments scheduled on weekends (Saturday and Sunday):
+
+SELECT Hname,Dname,Docid,Fname,Lname,COUNT("Day") as No_of_appointments_On_Weekend
+FROM
+(SELECT * FROM appointment
+NATURAL JOIN H_D_Doctor
+NATURAL JOIN Dept_Details
+NATURAL JOIN Hospital
+NATURAL JOIN Doctor) as apps
+GROUP BY Hname,Dname,Docid,Fname,Lname,"Day" HAVING "Day"='SATURDAY' OR "Day"='SUNDAY';
+
+-- 17) List of top hospials with maximum number of staff
+
+SELECT 
+H.Hname AS Hospital_Name,
+H.City AS Hospital_City,
+H.Pincode AS Hospital_Pincode,
+COUNT(S.RegNo) AS Total_Staff
+FROM 
+Hospital AS H
+LEFT JOIN 
+Staff AS S ON H.RegNo = S.RegNo
+ GROUP BY 
+H.Hname, H.City, H.Pincode
+ORDER BY 
+Total_Staff DESC LIMIT 10;
+
+-- 18) List Details of patient with given PID
+
+SELECT * FROM Patient WHERE PID='1011';
+
+-- 19) Find out the most common age group among patients:
+
+SELECT 
+    CASE
+        WHEN Age BETWEEN 0 AND 10 THEN '0-10'
+        WHEN Age BETWEEN 11 AND 20 THEN '11-20'
+        WHEN Age BETWEEN 21 AND 30 THEN '21-30'
+        WHEN Age BETWEEN 31 AND 40 THEN '31-40'
+        WHEN Age BETWEEN 41 AND 50 THEN '41-50'
+        ELSE 'Above 50' 
+    END AS AgeGroup,
+    COUNT(*) AS PatientCount
+FROM 
+    (SELECT AGE FROM Patient) AS AgeGroups
+GROUP BY 
+    AgeGroup
+ORDER BY 
+    PatientCount DESC;
+
+-- 20) To retrieve the list of patients who have been admitted multiple times in the same hospital
+
+SELECT Pat.Pid, Pat.Fname, Pat.Lname, Pat.RegNo, Pat.Dname, COUNT(*) AS Admissions
+FROM Patient AS Pat
+JOIN Consult AS Con ON Pat.Pid = Con.Pid AND Pat.RegNo = Con.RegNo AND Pat.Dname = Con.Dname
+GROUP BY Pat.Pid, Pat.Fname, Pat.Lname, Pat.RegNo, Pat.Dname HAVING COUNT(*) > 1;
+
+-- 21) Retrieve the contact numbers of all hospitals in a specific city along with the count of doctors available in each hospital
+
+SELECT Hospital.Hname, Hospital.City, Hospital_Contact_No.ContactNo, COUNT(H_D_Doctor.Docid) AS DoctorCount
+FROM Hospital
+JOIN Hospital_Contact_No ON Hospital.RegNo = Hospital_Contact_No.RegNo
+LEFT JOIN H_D_Doctor ON Hospital.RegNo = H_D_Doctor.RegNo
+WHERE Hospital.City = 'NEW DELHI'
+GROUP BY Hospital.Hname, Hospital.City, Hospital_Contact_No.ContactNo;
+
+-- 22) List of Departments with the Highest Number of Patients Admitted
+
+SELECT Regno, Dname, MAX(Admitted_into_Dept) AS No_Of_Admitted
+FROM
+(SELECT Regno,Dname, COUNT(Roomtype) AS Admitted_into_Dept
+FROM Patient
+WHERE Roomtype<>'NULL'
+GROUP BY Regno, Dname, Roomtype) AS HospitalDeptWiseAdmittedPatients
+GROUP BY Regno, Dname, Admitted_into_Dept ORDER BY No_of_Admitted DESC;
+
+-- 23) List of number of times patient checked by doctor department hospital wise.
+
+SELECT RegNo, Dname, pid, Fname, Lname, No_of_time_checked
+FROM Patient
+NATURAL JOIN checks
+NATURAL JOIN  
+(SELECT pid, RegNo, Dname, COUNT(*) AS No_of_time_checked 
+FROM check_Date
+GROUP BY pid,RegNo,Dname) As ck;
+
+-- 24) List of all patients who have undergone surgeries and are on medication, sorted by Department and Hospital
+
+SELECT Hname, Dname, pid, Fname, Lname FROM Hospital
+NATURAL JOIN
+(SELECT Regno, Dname, pid, Fname, Lname FROM MedicalHistory
+NATURAL JOIN Patient 
+WHERE Medication='YES' AND Surgeries='YES') AS CT;
+
+-- 25) Details of all appointments booked by User to doctor
+
+SELECT Appointment.*, Doctor.Fname AS Doc_Fname, Doctor.Lname AS Doc_Lname
+FROM Appointment
+JOIN Doctor ON Appointment.Docid = Doctor.Docid
+WHERE Appointment.Userid = '101';

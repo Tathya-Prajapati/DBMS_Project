@@ -1,0 +1,226 @@
+CREATE SCHEMA HMS;
+SET SEARCH_PATH TO HMS;
+
+--  --  --  --  --  --  --  --  1
+
+CREATE TABLE logged_user(
+	Userid SMALLINT NOT NULL,
+	Email VARCHAR NOT NULL,
+	PRIMARY KEY (Userid)
+);
+
+--  --  --  --  --  --  --  --  2
+
+CREATE TABLE Hospital(
+	RegNo VARCHAR NOT NULL,
+	Hname VARCHAR NOT NULL,
+	City VARCHAR NOT NULL,
+	Pincode CHAR(6) NOT NULL,
+	PRIMARY KEY (RegNo)
+);
+
+--  --  --  --  --  --  --  --  3
+
+CREATE TABLE Staff(
+	RegNo VARCHAR NOT NULL,
+	Empid BIGINT NOT NULL,
+	Sname VARCHAR NOT NULL,
+	Post VARCHAR NOT NULL,
+	PRIMARY KEY(RegNo,Empid),
+	FOREIGN KEY(RegNo) REFERENCES Hospital(RegNo)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  4
+
+CREATE TABLE Hospital_Contact_No(
+	RegNo VARCHAR NOT NULL,
+	ContactNo CHAR(10) NOT NULL,
+	PRIMARY KEY(RegNo,ContactNo),
+	FOREIGN KEY(RegNo) REFERENCES Hospital(RegNo)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  5
+
+CREATE TABLE Department(
+	Dname VARCHAR PRIMARY KEY
+);
+
+--  --  --  --  --  --  --  --  6
+
+CREATE TABLE Dept_Details(
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	ExtNo CHAR(3),
+	PRIMARY KEY(RegNo,Dname),
+	FOREIGN KEY(RegNo) REFERENCES Hospital(RegNo)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(Dname) REFERENCES Department(Dname)
+		ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  7
+
+CREATE TABLE Hospital_Capacity(
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Roomtype VARCHAR NOT NULL,
+	TotalCapacity INT NOT NULL,
+	PRIMARY KEY(RegNo,Dname,Roomtype),
+	FOREIGN KEY(RegNo,Dname) REFERENCES Dept_Details(RegNo,Dname)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  8
+
+CREATE TABLE Doctor(
+	Docid INT PRIMARY KEY,
+	Email VARCHAR NOT NULL,
+	ContactNo CHAR(10) NOT NULL,
+	Fname VARCHAR NOT NULL,
+	Lname VARCHAR NOT NULL,
+	Specialization VARCHAR NOT NULL
+);
+
+--  --  --  --  --  --  --  --  9
+
+CREATE TABLE H_D_Doctor(
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Docid INT NOT NULL,
+	PRIMARY KEY(RegNo,Dname,Docid),
+	FOREIGN KEY(RegNo,Dname) REFERENCES Dept_Details(RegNo,Dname)
+		ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(Docid) REFERENCES Doctor(Docid)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  10
+
+CREATE TABLE Doc_Visiting_Details(
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Docid INT NOT NULL,
+	"Day" VARCHAR NOT NULL,
+	PRIMARY KEY (RegNo,Dname,Docid,"Day"),
+	FOREIGN KEY(RegNo,Dname,Docid) REFERENCES H_D_Doctor(RegNo,Dname,Docid)
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  11
+
+CREATE TABLE Appointment(
+	Userid SMALLINT NOT NULL,
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Docid INT NOT NULL,
+	"Date" DATE NOT NULL,
+	"Time" TIME NOT NULL,
+	"Day" VARCHAR NOT NULL,
+	PRIMARY KEY(Userid,Docid,RegNo,Dname),
+	FOREIGN KEY(Userid) REFERENCES logged_user(Userid)
+	ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(RegNo,Dname,Docid) REFERENCES H_D_Doctor(RegNo,Dname,Docid)
+	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  12
+
+CREATE TABLE Patient(
+	Pid SMALLINT NOT NULL,
+	Docid INT NOT NULL,
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	gender VARCHAR NOT NULL,
+	age SMALLINT NOT NULL,
+	bgrp CHAR(3),
+	DOB DATE NOT NULL,
+	Weight NUMERIC(5,2) NOT NULL,
+	Height NUMERIC (5,2) NOT NULL,
+	Fname VARCHAR NOT NULL,
+	Lname VARCHAR NOT NULL,
+	Roomtype VARCHAR,
+	Bedno VARCHAR,
+	PRIMARY KEY(Pid),
+	FOREIGN KEY(RegNo,Dname,Docid) REFERENCES H_D_Doctor(RegNo,Dname,Docid)
+		ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+--  --  --  --  --  --  --  --  13
+
+CREATE TABLE Patient_Contact_Details(
+	Pid SMALLINT NOT NULL,
+	ContactNo CHAR(10) NOT NULL,
+	PRIMARY KEY(Pid,ContactNo),
+	FOREIGN KEY(Pid) REFERENCES Patient(Pid) 
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+--  --  --  --  --  --  --  --  14
+
+CREATE TABLE Checks(
+	Pid SMALLINT NOT NULL,
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Docid INT NOT NULL,
+	Reporttype VARCHAR,
+	"Date" DATE,
+	PRIMARY KEY(Pid,RegNo,Dname,Docid),
+	FOREIGN KEY(Pid) REFERENCES Patient(Pid) 
+		ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(RegNo,Dname,Docid) REFERENCES H_D_Doctor(RegNo,Dname,Docid)
+		ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+--  --  --  --  --  --  --  --  15
+
+CREATE TABLE Consult(
+	Pid SMALLINT NOT NULL,
+	RegNo VARCHAR NOT NULL,
+	Dname VARCHAR NOT NULL,
+	Docid INT NOT NULL,
+	arriveDate DATE NOT NULL,
+	PRIMARY KEY(Pid,RegNo,Dname,Docid),
+	FOREIGN KEY(Pid) REFERENCES Patient(Pid) 
+		ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(RegNo,Dname,Docid) REFERENCES H_D_Doctor(RegNo,Dname,Docid)
+		ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+--  --  --  --  --  --  --  --  16
+
+CREATE TABLE Check_report(
+Pid SMALLINT NOT NULL,
+RegNo VARCHAR NOT NULL,
+Dname VARCHAR NOT NULL,
+Docid INT NOT NULL,
+Reporttype VARCHAR,
+PRIMARY KEY(Pid,RegNo,Dname,Docid),
+FOREIGN KEY(Pid,RegNo,Dname,Docid) REFERENCES Checks(Pid,RegNo,Dname,Docid)
+ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+--  --  --  --  --  --  --  --  17
+
+CREATE TABLE Check_date (
+    Pid SMALLINT NOT NULL,
+    RegNo VARCHAR(255) NOT NULL,
+    Dname VARCHAR NOT NULL,
+    Docid INT NOT NULL,
+    "Date" DATE NOT NULL,
+    PRIMARY KEY (Pid, RegNo, Dname, Docid, "Date"),
+    FOREIGN KEY (Pid, RegNo, Dname, Docid) REFERENCES Checks(Pid, RegNo, Dname, Docid) ON UPDATE CASCADE ON DELETE SET NULL
+);
+
+--  --  --  --  --  --  --  --  18
+
+CREATE TABLE MedicalHistory(
+	"Condition" VARCHAR NOT NULL,
+	Pid SMALLINT NOT NULL,
+	Medication CHAR(3),
+	Surgeries CHAR(3),
+	PRIMARY KEY("Condition",Pid),
+	FOREIGN KEY(Pid) REFERENCES Patient(Pid) 
+		ON UPDATE CASCADE ON DELETE CASCADE
+);
